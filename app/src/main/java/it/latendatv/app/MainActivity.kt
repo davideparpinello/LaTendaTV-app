@@ -46,7 +46,7 @@ class MainActivity : Activity() {
         //super.dispatchKeyEvent(event)
         println(event.action.toString() + " " + event.keyCode + " - " + event.unicodeChar.toChar())
         if (event.action == KeyEvent.ACTION_UP) {
-            if (event.keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
+            /*if (event.keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
                 isPlayed = if (isPlayed) {
                     exoPlayer?.pause()
                     false
@@ -54,11 +54,11 @@ class MainActivity : Activity() {
                     exoPlayer?.play()
                     true
                 }
-            }
+            }*/
             if (event.keyCode == KeyEvent.KEYCODE_BACK) {
                 if (isPlayed) {
                     moveTaskToBack(true)
-                    exoPlayer?.pause()
+                    exoPlayer?.stop()
                     isPlayed = false
                 }
             }
@@ -104,7 +104,7 @@ class MainActivity : Activity() {
 
     override fun onStop() {
         //super.onStop()
-        exoPlayer?.pause()
+        exoPlayer?.stop()
         isPlayed = false
         super.onStop()
     }
@@ -128,12 +128,13 @@ class MainActivity : Activity() {
     }*/
 
     override fun onRestart() {
-        exoPlayer?.play()
+        preparePlayer()
+
         isPlayed = true
         super.onRestart()
     }
 
     companion object {
-        const val URL = "https://2-fss-1.streamhoster.com/pl_148/amlst:206202-2980948/playlist.m3u8"
+        const val URL = "http://2-fss-1.streamhoster.com/pl_148/206202-2980948-1/chunklist.m3u8"
     }
 }
