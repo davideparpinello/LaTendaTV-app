@@ -81,7 +81,7 @@ class MainActivity : Activity() {
         exoPlayer = ExoPlayer.Builder(this).build()
         exoPlayer?.playWhenReady = true
         binding.playerView.player = exoPlayer
-        val defaultHttpDataSourceFactory = DefaultHttpDataSource.Factory()
+        val defaultHttpDataSourceFactory = DefaultHttpDataSource.Factory().setAllowCrossProtocolRedirects(true)
         val mediaItem = MediaItem.fromUri(URL)
         val mediaSource =
             HlsMediaSource.Factory(defaultHttpDataSourceFactory).createMediaSource(mediaItem)
@@ -135,6 +135,6 @@ class MainActivity : Activity() {
     }
 
     companion object {
-        const val URL = "http://2-fss-1.streamhoster.com/pl_148/206202-2980948-1/chunklist.m3u8"
+        const val URL = "https://latendatv.it/livestream"
     }
 }
